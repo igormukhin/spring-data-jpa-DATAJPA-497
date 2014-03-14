@@ -1,0 +1,1 @@
+insert into record (field1, field2, field3) values ('value1', 'value2', 'value3');
