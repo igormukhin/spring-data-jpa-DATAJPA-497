@@ -1,6 +1,5 @@
 package de.igormukhin.test;
 
-import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -37,33 +36,46 @@ public class RecordRepositoryIntegrationTest {
 	}
 
 	@Test
-	public void executesQueryDslOrderByField3() {
+	public void executesQueryDslOrderByField3Asc() {
 
 		Iterable<Record> records = repository.findAll(
-				QRecord.record.pk.field1.eq("value1"),
+				null,
 				QRecord.record.field3.asc());
 
-		assertThat(records, Matchers.<Record>hasItem(hasProperty("field3", is("value3"))));
+		assertThat(records, Matchers.<Record>iterableWithSize(2));
+		assertThat(records.iterator().next().getField3(), is("avalue3"));
 	}
 
-	/**
-	 * For the record: This test would pass for: 
-	 *  <!-- <querydsl.version>2.8.0</querydsl.version> -->
-	 *	<!-- <spring.data.jpa.version>1.3.0.RELEASE</spring.data.jpa.version> -->
-	 *  <!-- <spring.version>3.2.2.RELEASE</spring.version> -->
-	 *  
-	 * But it will fail for:
-	 * <spring.version>4.0.2.RELEASE</spring.version>
-	 * <spring.data.jpa.version>1.5.0.RELEASE</spring.data.jpa.version>
-	 * <querydsl.version>3.3.1</querydsl.version>
-	 */
 	@Test
-	public void executesQueryDslOrderByPkField2() {
+	public void executesQueryDslOrderByField3Desc() {
 
 		Iterable<Record> records = repository.findAll(
-				QRecord.record.pk.field1.eq("value1"),
+				null,
+				QRecord.record.field3.desc());
+
+		assertThat(records, Matchers.<Record>iterableWithSize(2));
+		assertThat(records.iterator().next().getField3(), is("bvalue3"));
+	}
+
+	@Test
+	public void executesQueryDslOrderByPkField2Asc() {
+
+		Iterable<Record> records = repository.findAll(
+				null,
 				QRecord.record.pk.field2.asc());
 
-		assertThat(records, Matchers.<Record>hasItem(hasProperty("field3", is("value3"))));
+		assertThat(records, Matchers.<Record>iterableWithSize(2));
+		assertThat(records.iterator().next().getField3(), is("avalue3"));
+	}
+
+	@Test
+	public void executesQueryDslOrderByPkField2Desc() {
+
+		Iterable<Record> records = repository.findAll(
+				null,
+				QRecord.record.pk.field2.asc());
+
+		assertThat(records, Matchers.<Record>iterableWithSize(2));
+		assertThat(records.iterator().next().getField3(), is("bvalue3"));
 	}
 }

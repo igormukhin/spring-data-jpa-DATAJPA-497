@@ -5,55 +5,34 @@
 	<groupId>de.igormukhin.test</groupId>
 	<artifactId>test-datajpa-397</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
-
+	
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.0.0.RC4</version>
+	</parent>
+	
 	<properties>
 		<java.version>7</java.version>
 		
-		<!-- <spring.version>3.2.2.RELEASE</spring.version> -->
-		<!-- <querydsl.version>2.8.0</querydsl.version> -->
-		<!-- <spring.data.jpa.version>1.3.0.RELEASE</spring.data.jpa.version> -->
-		
-		<spring.version>4.0.2.RELEASE</spring.version>
-		<spring.data.jpa.version>1.5.0.RELEASE</spring.data.jpa.version>
 		<querydsl.version>3.3.1</querydsl.version>
 	</properties>
 
 	<dependencies>
-	
+
 		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-orm</artifactId>
-			<version>${spring.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>commons-logging</groupId>
-					<artifactId>commons-logging</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context</artifactId>
-			<version>${spring.version}</version>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 
 		<dependency>
-			<groupId>org.springframework.data</groupId>
-			<artifactId>spring-data-jpa</artifactId>
-			<version>${spring.data.jpa.version}</version>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
 		</dependency>
-		
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-entitymanager</artifactId>
-			<version>4.1.10.Final</version>
-		</dependency>
-		
+
 		<dependency>
 			<groupId>org.hsqldb</groupId>
 			<artifactId>hsqldb</artifactId>
-			<version>2.2.8</version>
 			<scope>runtime</scope>
 		</dependency>
 		
@@ -63,34 +42,6 @@
 			<version>${querydsl.version}</version>
 		</dependency>
 		
-		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-classic</artifactId>
-			<version>1.0.6</version>
-			<scope>runtime</scope>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.hamcrest</groupId>
-			<artifactId>hamcrest-library</artifactId>
-			<version>1.3</version>
-			<scope>test</scope>
-		</dependency>
-		
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit-dep</artifactId>
-			<version>4.10</version>
-			<scope>test</scope>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-test</artifactId>
-			<version>${spring.version}</version>
-			<scope>test</scope>
-		</dependency>
-		
 	</dependencies>
 
 	<build>
@@ -98,16 +49,16 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.1</version>
 				<configuration>
 					<source>${java.version}</source>
 					<target>${java.version}</target>
 				</configuration>
 			</plugin>
+			
 			<plugin>
 				<groupId>com.mysema.maven</groupId>
-				<artifactId>maven-apt-plugin</artifactId>
-				<version>1.0.4</version>
+				<artifactId>apt-maven-plugin</artifactId>
+				<version>1.1.0</version>
 				<configuration>
 					<processor>com.mysema.query.apt.jpa.JPAAnnotationProcessor</processor>
 				</configuration>
@@ -133,4 +84,14 @@
 		</plugins>
 	</build>
 
+	<repositories>
+		<repository>
+			<id>spring-libs-milestone</id>
+			<url>http://repo.spring.io/libs-milestone</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+	
 </project>
