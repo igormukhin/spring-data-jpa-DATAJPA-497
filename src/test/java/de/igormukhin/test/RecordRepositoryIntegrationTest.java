@@ -76,7 +76,7 @@ public class RecordRepositoryIntegrationTest {
 
 		Iterable<Record> records = repository.findAll(
 				null,
-				QRecord.record.pk.field2.asc());
+				QRecord.record.pk.field2.desc());
 
 		assertThat(records, Matchers.<Record>iterableWithSize(2));
 		assertThat(records.iterator().next().getField3(), is("bvalue3"));
